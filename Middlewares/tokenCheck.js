@@ -19,7 +19,7 @@ export const tokenCheck = async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.SECRETKEY);
 
 
-      req.user = decoded;
+      req.user = decoded.email;
 
       next();
     } catch (error) {

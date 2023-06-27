@@ -24,9 +24,13 @@ export const loginController = async (req, res) => {
     }
 
     if (staticEmail === email && statisPassword === password) {
-      const token = jwt.sign("mail@gmail.com", process.env.SECRETKEY, {
-        expiresIn: 86400,
-      });
+      const token = jwt.sign(
+        { email: "mail@gmail.com" },
+        process.env.SECRETKEY,
+        {
+          expiresIn: 86400,
+        }
+      );
 
       const sessionToken = {
         token,
@@ -41,7 +45,7 @@ export const loginController = async (req, res) => {
       res.status(202).json({
         status: true,
         message: "Admin login successfully",
-        token: token,
+        token: sessionToken,
       });
     }
   } catch (error) {
